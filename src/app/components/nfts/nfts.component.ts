@@ -12,6 +12,7 @@ export class NftsComponent implements OnInit {
 
   ngOnInit(): void {
     this.bc.loadWeb3();
+    this.bc.loadBlockchainData();
   }
 
 }

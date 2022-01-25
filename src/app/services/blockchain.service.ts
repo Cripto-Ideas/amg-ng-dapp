@@ -34,7 +34,7 @@ export class BlockchainService {
     console.log(this.windowBrowser.web3);
   }
 
-/*  async loadBlockchainData() {
+  async loadBlockchainData() {
     const web3 = this.windowBrowser.web3
     // Cargar una cuenta
     const accounts = await web3.eth.getAccounts()
@@ -43,6 +43,6 @@ export class BlockchainService {
     
     this.mainAccount = accounts[0];   
     console.log(this.mainAccount);
-  }*/
+  }
 
 }
