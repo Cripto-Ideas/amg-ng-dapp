@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NftsComponent } from './components/nfts/nfts.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NftsComponent
   ],
   imports: [
     BrowserModule,
