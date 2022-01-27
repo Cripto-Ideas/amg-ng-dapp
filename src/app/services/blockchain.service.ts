@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 
+import Color from '../abi/Color.json';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,24 +37,27 @@ export class BlockchainService {
   }
 
   async loadBlockchainData() {
-    const web3 = this.windowBrowser.web3
+    console.log('BlockchainService :: loadBlockchainData :: start');
+
+    const web3 = this.windowBrowser.web3;
+
     // Cargar una cuenta
-    const accounts = await web3.eth.getAccounts()
-    console.log(accounts);
-    console.log(await web3.eth);
+    const accounts = await web3.eth.getAccounts();
+    console.log('Web3 Object: ',await web3.eth);
+    console.log('Cuentas: ', accounts);
     
     this.mainAccount = accounts[0];   
-    console.log(this.mainAccount);
+    console.log('Main Cuenta: ', this.mainAccount);
   }
 
   public async getAccount(): Promise<any> {
-    console.log('transfer.service :: getAccount :: start');
+    console.log('BlockchainService :: getAccount :: start');
 
     await this.loadBlockchainData();
 
     if (this.mainAccount == null) {
       this.mainAccount = await new Promise((resolve, reject) => {
-        console.log('transfer.service :: getAccount :: eth');
+        console.log('BlockchainService :: getAccount:', this.mainAccount);
         /*console.log(this.windowBrowser.web3.eth);
         this.windowBrowser.web3.eth.getAccounts((err, retAccount) => {
           console.log('transfer.service :: getAccount: retAccount');
@@ -89,5 +94,55 @@ export class BlockchainService {
     const resu = await web3.eth.getBalance(this.mainAccount);
     return resu;
   }
+
+
+  public async getTotalSupply(): Promise<any> {
+    console.log('transfer.service :: getTotalSupply :: start');
+
+    await this.loadBlockchainData();
+
+    const web3 = this.windowBrowser.web3
+
+    // Cargar un contrato
+    const networkId = '5777'
+    const networkData = Color.networks[networkId]
+    if(networkData) {
+      const abi = Color.abi 
+      const address = networkData.address
+      const contract = new web3.eth.Contract(abi, address)
+      console.log(contract)
+
+      
+      // Función 'totalSupply' del Smart Contract
+      const totalSupply = await contract.methods.totalSupply().call()
+      console.log(totalSupply)
+
+      // Carga de colores
+      const colors: string[] = [];
+      for (var i = 1; i<=totalSupply; i++){
+        const color = await contract.methods.colors(i-1).call()
+        { colors: [...colors, color] };
+      }
+      console.log(colors);
+
+      return totalSupply;
+
+      /* return new Promise (resolve) { 
+        Resolve(
+          const nfts = { 
+                  "totalSupply": totalSupply,
+                  "colors": colors
+                }
+        ) }
+      
+
+      */
+
+
+    } else {
+      window.alert('¡Smart Contract no desplegado en la red!')
+    }
+  }
+
 
 }

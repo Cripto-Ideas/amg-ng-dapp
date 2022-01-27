@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BlockchainService } from 'src/app/services/blockchain.service';
 
+//import Color from '../abi/Color.json';
+
 @Component({
   selector: 'app-nfts',
   templateUrl: './nfts.component.html',
@@ -10,6 +12,9 @@ export class NftsComponent implements OnInit {
 
   account: any;
   balance: any;
+  //nftAddress: any = Color.networks['5777'].address;
+  nftAddress: any = '0x66bdd8e9c20452FB2F4CA69Ee0522A22c3F68f64';
+  totalSupply: any;
 
   constructor(private bc: BlockchainService) { }
 
@@ -25,6 +30,11 @@ export class NftsComponent implements OnInit {
     this.bc.getBalance().then( value => { 
       console.log('balance:',value);
       this.balance = value;
+    });
+
+    this.bc.getTotalSupply().then( value => { 
+      console.log('totalSupply:',value);
+      this.totalSupply = value;
     });
 
   }

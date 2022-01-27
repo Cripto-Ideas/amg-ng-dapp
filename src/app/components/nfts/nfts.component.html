@@ -3,7 +3,7 @@
      
     .content {
       display: flex;
-      margin: 82px auto 32px;
+      margin: 22px auto 32px;
       padding: 0 16px;
       max-width: 960px;
       flex-direction: column;
@@ -48,8 +48,13 @@
 
     <!-- Terminal -->
     <div class="terminal" >
-        <pre >account: {{ account }}</pre>
-        <pre >balance: {{ balance }} wei</pre>
+        <pre >Account: {{ account }}</pre>
+        <pre >Balance: {{ balance }} wei</pre>
     </div>
+
+    <div class="terminal" >
+      <pre >NFT Contract: {{ nftAddress }}</pre>
+      <pre >Total Supply: {{ totalSupply }} NFTs</pre>
+  </div>
 
 </div>
