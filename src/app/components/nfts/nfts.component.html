@@ -58,13 +58,50 @@
     <pre >NFTs: {{ infoNFTs?.NFTs }}</pre>
   </div>
 
+  <!--div> 
+    NO ANDA LA PROPUESTA DE AMENGUAL
+    <h3>NFTs</h3>
+    <div *ngFor="let nft of infoNFTs?.NFTs" className="col-md-3 mb-3" >
+      <div className="token" [ngStyle]="{'background-color':nft}"></div>
+      <div>{{nft}}</div>
+    </div>
+  </div-->  
+  
   <div>
     <h3>NFTs</h3>
+    <hr>
     <ul>
       <li *ngFor="let nft of infoNFTs?.NFTs" [ngStyle]="{'color':nft}">
-        <span style="color: black"> {{ nft }} </span>
+        <span> {{ nft }} </span>
       </li>
     </ul>
   </div>
+
+  <div>
+    <h3>Nuevo NFT</h3>
+    <hr>
+    
+    <input id="new-nft" #nft />
+
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button class="add-button" (click)="agregar(nft.value); nft.value=''">
+      Agregar NFT
+    </button>
+    <!--form (ngSubmit)="agregar()">
+        <input 
+            type="text" 
+            placeholder="Nombre" 
+            name="nombre"
+            [(ngModel)]="nuevoNFT"
+        />
+
+    
+        <button type="submit">
+            Agregar
+        </button>
+    
+    </form-->
+  </div>
+
 
 </div>
