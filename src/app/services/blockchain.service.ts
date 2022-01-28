@@ -147,4 +147,42 @@ export class BlockchainService {
   }
 
 
+  /*/ Función para un nuevo Color como NFT (AMENGUAL, React)
+  mint = (color) => {
+    console.log('¡Nuevo NFT en procedimiento!')
+    this.state.contract.methods.mint(color).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      this.setState({
+        colors: [...this.state.colors, color]
+      })
+    })
+  }*/
+
+
+  public async mintNFT(nft: string) {
+    console.log('transfer.service :: mintNFT :: start = ', nft);
+
+    await this.loadBlockchainData();
+
+    const web3 = this.windowBrowser.web3
+
+    // Cargar un contrato
+    const networkId = '5777'
+    const networkData = Color.networks[networkId]
+    if(networkData) {
+      const abi = Color.abi 
+      const address = networkData.address
+      const contract = new web3.eth.Contract(abi, address)
+      //console.log('contractAddress:', networkData.address)
+      //console.log('contract:', contract)
+
+      
+      // Función 'totalSupply' del Smart Contract
+      const totalSupply = await contract.methods.mint(nft).send({ from:  this.mainAccount });
+      //console.log('totalSupply:', totalSupply)
+      
+    }      
+  }
+
+
 }

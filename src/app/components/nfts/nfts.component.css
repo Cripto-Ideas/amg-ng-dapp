@@ -8,3 +8,11 @@ li {
     margin-top: -10px;
     color: black; /* text color */
   }
+
+  .token {
+    color: red; 
+    height: 60;
+    width: 60;
+    border-radius: 50%;
+    display: inline-block;
+}

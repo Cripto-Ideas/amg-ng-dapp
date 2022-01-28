@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BlockchainService } from 'src/app/services/blockchain.service';
 
 //import Color from '../abi/Color.json';
@@ -13,6 +13,7 @@ export class NftsComponent implements OnInit {
   account: any;
   balance: any;
   infoNFTs: any;
+  //@Input() nuevoNFT='#880000';
 
   constructor(private bc: BlockchainService) { }
 
@@ -34,6 +35,16 @@ export class NftsComponent implements OnInit {
       console.log('getNFTs:',value);
       this.infoNFTs = value;
     });
+
+  }
+
+  agregar(nuevoNFT: string) {
+    if ( nuevoNFT.trim().length === 0 ) { return; }
+    
+    console.log('NuevoNFT', nuevoNFT);
+    this.bc.mintNFT( nuevoNFT );
+
+    //this.nuevoNFT = ''; // lo blanqueo despues de insertar
 
   }
 
