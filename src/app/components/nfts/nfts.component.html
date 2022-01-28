@@ -66,41 +66,30 @@
       <div>{{nft}}</div>
     </div>
   </div-->  
+  <div class="row">
+    
+    <div class="col">
+      <h3>NFTs</h3>
+      <hr>
+      <ul>
+        <li *ngFor="let nft of infoNFTs?.NFTs" [ngStyle]="{'color':nft}">
+          <span> {{ nft }} </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <h3>Nuevo NFT</h3>
+      <hr>
+      
+      <input id="new-nft" #nft />
   
-  <div>
-    <h3>NFTs</h3>
-    <hr>
-    <ul>
-      <li *ngFor="let nft of infoNFTs?.NFTs" [ngStyle]="{'color':nft}">
-        <span> {{ nft }} </span>
-      </li>
-    </ul>
-  </div>
-
-  <div>
-    <h3>Nuevo NFT</h3>
-    <hr>
-    
-    <input id="new-nft" #nft />
-
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button class="add-button" (click)="agregar(nft.value); nft.value=''">
-      Agregar NFT
-    </button>
-    <!--form (ngSubmit)="agregar()">
-        <input 
-            type="text" 
-            placeholder="Nombre" 
-            name="nombre"
-            [(ngModel)]="nuevoNFT"
-        />
-
-    
-        <button type="submit">
-            Agregar
-        </button>
-    
-    </form-->
+      <!-- (click) passes input value to agregar() and then clears the input -->
+      <button class="add-button" (click)="agregar(nft.value); nft.value=''">
+        Agregar NFT
+      </button>
+    </div>
+  
   </div>
 
 
