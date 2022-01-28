@@ -46,15 +46,25 @@
 
 <div class="content" role="main">
 
-    <!-- Terminal -->
-    <div class="terminal" >
-        <pre >Account: {{ account }}</pre>
-        <pre >Balance: {{ balance }} wei</pre>
-    </div>
+  <!-- Terminal -->
+  <div class="terminal" >
+      <pre >Account: {{ account }}</pre>
+      <pre >Balance: {{ balance }} wei</pre>
+  </div>
 
-    <div class="terminal" >
-      <pre >NFT Contract: {{ nftAddress }}</pre>
-      <pre >Total Supply: {{ totalSupply }} NFTs</pre>
+  <div class="terminal" >
+    <pre >NFT Contract: {{ infoNFTs?.contractAddress }}</pre>
+    <pre >Total Supply: {{ infoNFTs?.totalSupply }} NFTs</pre>
+    <pre >NFTs: {{ infoNFTs?.NFTs }}</pre>
+  </div>
+
+  <div>
+    <h3>NFTs</h3>
+    <ul>
+      <li *ngFor="let nft of infoNFTs?.NFTs" [ngStyle]="{'color':nft}">
+        <span style="color: black"> {{ nft }} </span>
+      </li>
+    </ul>
   </div>
 
 </div>

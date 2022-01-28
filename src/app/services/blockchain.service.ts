@@ -96,8 +96,8 @@ export class BlockchainService {
   }
 
 
-  public async getTotalSupply(): Promise<any> {
-    console.log('transfer.service :: getTotalSupply :: start');
+  public async getNFTs(): Promise<any> {
+    console.log('transfer.service :: getNFTs :: start');
 
     await this.loadBlockchainData();
 
@@ -110,34 +110,36 @@ export class BlockchainService {
       const abi = Color.abi 
       const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
-      console.log(contract)
+      //console.log('contractAddress:', networkData.address)
+      //console.log('contract:', contract)
 
       
       // Función 'totalSupply' del Smart Contract
       const totalSupply = await contract.methods.totalSupply().call()
-      console.log(totalSupply)
+      //console.log('totalSupply:', totalSupply)
 
-      // Carga de colores
+      // Carga de NFTs
       const colors: string[] = [];
+
       for (var i = 1; i<=totalSupply; i++){
-        const color = await contract.methods.colors(i-1).call()
-        { colors: [...colors, color] };
+        const color = await contract.methods.colors(i-1).call();
+        colors.push(color);
+        //{ colors: [...colors, color] };
       }
-      console.log(colors);
+      //console.log('NFTs:', colors);
 
-      return totalSupply;
+      const nfts = { 
+        "contractAddress" : networkData.address,
+        "totalSupply": totalSupply,
+        "NFTs": colors
+      }
+      console.log('NFTs:', nfts);
 
-      /* return new Promise (resolve) { 
-        Resolve(
-          const nfts = { 
-                  "totalSupply": totalSupply,
-                  "colors": colors
-                }
-        ) }
-      
+      //return totalSupply;
 
-      */
-
+      return new Promise ( (resolve) =>
+        resolve( nfts )
+        );  
 
     } else {
       window.alert('¡Smart Contract no desplegado en la red!')

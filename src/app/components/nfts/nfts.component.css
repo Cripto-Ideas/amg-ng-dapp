@@ -1,0 +1,10 @@
+li {
+    /*color: red; /* bullet color */
+    font-size: 30px;
+  }
+  li span {
+
+    font-size: 12px;
+    margin-top: -10px;
+    color: black; /* text color */
+  }

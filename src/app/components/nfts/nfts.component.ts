@@ -12,9 +12,7 @@ export class NftsComponent implements OnInit {
 
   account: any;
   balance: any;
-  //nftAddress: any = Color.networks['5777'].address;
-  nftAddress: any = '0x66bdd8e9c20452FB2F4CA69Ee0522A22c3F68f64';
-  totalSupply: any;
+  infoNFTs: any;
 
   constructor(private bc: BlockchainService) { }
 
@@ -32,9 +30,9 @@ export class NftsComponent implements OnInit {
       this.balance = value;
     });
 
-    this.bc.getTotalSupply().then( value => { 
-      console.log('totalSupply:',value);
-      this.totalSupply = value;
+    this.bc.getNFTs().then( value => { 
+      console.log('getNFTs:',value);
+      this.infoNFTs = value;
     });
 
   }
